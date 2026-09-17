@@ -35,15 +35,6 @@ class NetworkStateRepository(private val context: Context, private val onChanged
     fun startObserving() {
         if (listening) return
         listening = true
-        context.registerReceiver(receiver, IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED).apply {
-            addAction(WifiManager.WIFI_STATE_CHANGED_ACTION)
-            addAction(LocationManager.MODE_CHANGED_ACTION)
-        }, Context.RECEIVER_EXPORTED)
-        wifi.startObserving()
-        cellular.startObserving()
-        network = manager.activeNetwork
-        capabilities = network?.let(manager::getNetworkCapabilities)
-        publishState()
         val flags = if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
             ConnectivityManager.NetworkCallback.FLAG_INCLUDE_LOCATION_INFO else 0
         val observer = object : ConnectivityManager.NetworkCallback(flags) {
@@ -51,8 +42,6 @@ class NetworkStateRepository(private val context: Context, private val onChanged
                 if (!listening || callback !== this) return
                 this@NetworkStateRepository.network = network
                 capabilities = null
-                cellular.refreshSubscription()
-                publishState()
             }
             override fun onCapabilitiesChanged(network: Network, networkCapabilities: NetworkCapabilities) {
                 if (!listening || callback !== this || network != this@NetworkStateRepository.network) return
@@ -70,11 +59,20 @@ class NetworkStateRepository(private val context: Context, private val onChanged
         }
         manager.registerDefaultNetworkCallback(observer, handler)
         callback = observer
+        network = manager.activeNetwork
+        context.registerReceiver(receiver, IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED).apply {
+            addAction(WifiManager.WIFI_STATE_CHANGED_ACTION)
+            addAction(LocationManager.MODE_CHANGED_ACTION)
+        }, Context.RECEIVER_EXPORTED)
+        wifi.startObserving()
+        cellular.startObserving()
+        publishState()
     }
 
     private fun publishState() {
         if (!listening) return
         val current = capabilities
+        if (network != null && current == null) return
         val validated = current?.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED) == true
         onChanged(when {
             current?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true -> wifi.getState(current)
