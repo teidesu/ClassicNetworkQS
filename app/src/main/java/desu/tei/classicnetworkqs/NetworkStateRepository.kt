@@ -11,6 +11,7 @@ import android.net.wifi.WifiManager
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
@@ -57,9 +58,15 @@ class NetworkStateRepository(private val context: Context, private val onChanged
                 publishState()
             }
         }
-        manager.registerDefaultNetworkCallback(observer, handler)
+        val request = NetworkRequest.Builder()
+            .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+            .addCapability(NetworkCapabilities.NET_CAPABILITY_NOT_VPN)
+            .build()
+        manager.registerBestMatchingNetworkCallback(request, observer, handler)
         callback = observer
-        network = manager.activeNetwork
+        network = manager.allNetworks.firstOrNull {
+            request.canBeSatisfiedBy(manager.getNetworkCapabilities(it))
+        }
         context.registerReceiver(receiver, IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED).apply {
             addAction(WifiManager.WIFI_STATE_CHANGED_ACTION)
             addAction(LocationManager.MODE_CHANGED_ACTION)
