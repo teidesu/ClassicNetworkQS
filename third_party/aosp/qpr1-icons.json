@@ -1,0 +1,90 @@
+{
+  "branch": "android16-qpr1-release",
+  "revision": "33b96ce8a122757002e5040ac59824bd7a262e00",
+  "icons": {
+    "ic_qpr1_wifi_0": {
+      "source": "packages/SettingsLib/res/drawable/ic_wifi_0.xml",
+      "source_sha256": "b04d7f18526e685e36e5db2ff8f9dccda7304ad785bc75b7ecfafaf1d846874c"
+    },
+    "ic_qpr1_wifi_0_no_internet": {
+      "source": "packages/SettingsLib/res/drawable/ic_wifi_0_error.xml",
+      "source_sha256": "d2e74b0dfb69a2461b4065d0e4762736be332f09d7cee168187dac27c3deea20"
+    },
+    "ic_qpr1_wifi_1": {
+      "source": "packages/SettingsLib/res/drawable/ic_wifi_1.xml",
+      "source_sha256": "d61be7c3d5c280b2520cf8d751032db21bfdad53e055476c95cce7dc239d3632"
+    },
+    "ic_qpr1_wifi_1_no_internet": {
+      "source": "packages/SettingsLib/res/drawable/ic_wifi_1_error.xml",
+      "source_sha256": "072a9150c71f4acde4127a3eaf89938368b0346d9089b798c3bf6981cb294caf"
+    },
+    "ic_qpr1_wifi_2": {
+      "source": "packages/SettingsLib/res/drawable/ic_wifi_2.xml",
+      "source_sha256": "6995e5ae68232c5340e876e58a24d6756fa789d3c0036903bec1e8b4b96996ee"
+    },
+    "ic_qpr1_wifi_2_no_internet": {
+      "source": "packages/SettingsLib/res/drawable/ic_wifi_2_error.xml",
+      "source_sha256": "c16577b36b8b62cd7a4c0482170fd13938dca6239a59619b0b959d30cbc60795"
+    },
+    "ic_qpr1_wifi_3": {
+      "source": "packages/SettingsLib/res/drawable/ic_wifi_2.xml",
+      "source_sha256": "6995e5ae68232c5340e876e58a24d6756fa789d3c0036903bec1e8b4b96996ee"
+    },
+    "ic_qpr1_wifi_3_no_internet": {
+      "source": "packages/SettingsLib/res/drawable/ic_wifi_2_error.xml",
+      "source_sha256": "c16577b36b8b62cd7a4c0482170fd13938dca6239a59619b0b959d30cbc60795"
+    },
+    "ic_qpr1_wifi_4": {
+      "source": "packages/SettingsLib/res/drawable/ic_wifi_3.xml",
+      "source_sha256": "9d989fc46689a7a280f7458994cba16afcd8a7d3c6599098e7bb9501e6a4dc11"
+    },
+    "ic_qpr1_wifi_4_no_internet": {
+      "source": "packages/SettingsLib/res/drawable/ic_wifi_3_error.xml",
+      "source_sha256": "e3bb7086eb0a7c5f6e85723dedf298cc8d0520651893682a2f0218cafc6fc17b"
+    },
+    "ic_qpr1_cellular_0": {
+      "source": "packages/SettingsLib/res/drawable/ic_mobile_0_4_bar.xml",
+      "source_sha256": "6923d64db139fa3a4cf8dcabeb789bea3744b2d83b778fa0bab95d1048f958ce"
+    },
+    "ic_qpr1_cellular_0_no_internet": {
+      "source": "packages/SettingsLib/res/drawable/ic_mobile_0_4_bar_error.xml",
+      "source_sha256": "7d4fa59d26c30df7cac4c6512790bcf3c5935dc3c6dd6f1fccf1688a4ac498aa"
+    },
+    "ic_qpr1_cellular_1": {
+      "source": "packages/SettingsLib/res/drawable/ic_mobile_1_4_bar.xml",
+      "source_sha256": "65457b6c3a0b0dbb8e67ba37938a91a488ebb8c2d6e32b60b926045923c4a2c8"
+    },
+    "ic_qpr1_cellular_1_no_internet": {
+      "source": "packages/SettingsLib/res/drawable/ic_mobile_1_4_bar_error.xml",
+      "source_sha256": "47dd9d0bbc27429c1e5122ba43969a6f973e89e6aa211ffce6f23b6e4df2c352"
+    },
+    "ic_qpr1_cellular_2": {
+      "source": "packages/SettingsLib/res/drawable/ic_mobile_2_4_bar.xml",
+      "source_sha256": "06683c48153a5b926010fa5085a54f7594f1266efce717bdc007c8d565116ce4"
+    },
+    "ic_qpr1_cellular_2_no_internet": {
+      "source": "packages/SettingsLib/res/drawable/ic_mobile_2_4_bar_error.xml",
+      "source_sha256": "0ab57d380c489c869bc8009c94f77cb5146070bd8d4e0e97bd731c22bf966c63"
+    },
+    "ic_qpr1_cellular_3": {
+      "source": "packages/SettingsLib/res/drawable/ic_mobile_3_4_bar.xml",
+      "source_sha256": "e6feecf5ac49f6c2f303e224304c3a23070b11412aa49f5014249c23ab675aa7"
+    },
+    "ic_qpr1_cellular_3_no_internet": {
+      "source": "packages/SettingsLib/res/drawable/ic_mobile_3_4_bar_error.xml",
+      "source_sha256": "4a8da33834bc86d90871816a3a4f855d0f5bca1e7bbf687a9acbd3e17ae1f3cf"
+    },
+    "ic_qpr1_cellular_4": {
+      "source": "packages/SettingsLib/res/drawable/ic_mobile_4_4_bar.xml",
+      "source_sha256": "400b6e3801e71d3bab4879f2994009aceb7764035e6412075b52c48a84e51867"
+    },
+    "ic_qpr1_cellular_4_no_internet": {
+      "source": "packages/SettingsLib/res/drawable/ic_mobile_4_4_bar_error.xml",
+      "source_sha256": "30cc660301456b38de07b21a4a11ea4865496507084b4692383a932a7dc886e8"
+    },
+    "ic_networks_available": {
+      "source": "packages/SystemUI/res/drawable/ic_qs_no_internet_available.xml",
+      "source_sha256": "460313a253e73827f7b1d031868662c71d71aa1f036474851fbb0d66e17cb7c1"
+    }
+  }
+}

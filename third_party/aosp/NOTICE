@@ -1,0 +1,24 @@
+Android Open Source Project icons
+Copyright (C) 2015, 2019, 2020, 2021 The Android Open Source Project
+Licensed under Apache License 2.0; see LICENSE and individual vector headers.
+
+Source: platform/frameworks/base, android-16.0.0_r1.
+icons.json records source paths and hashes. tools/import_aosp_icons.py reproduces imports.
+
+Classic (newStatusBarIcons=false) WifiIcons and SignalDrawable variants are used.
+Wi-Fi, ethernet and globe assets are copied verbatim. Cellular normal assets retain
+upstream paths and add autoMirrored to match SignalDrawable's RTL behavior.
+Cellular no-internet assets bake SignalDrawable.STATE_CUT using config.xml:
+config_signalCutoutWidthFraction=7, config_signalCutoutHeightFraction=17,
+config_signalAttributionPath=M20,10h2v8h-2z M20,20h2v2h-2z.
+SignalDrawable clears the bottom-right 7x17 area of its 24x24 canvas and draws
+this attribution path; vectors achieve the same geometry with a notched polygon clip.
+
+No runtime dependency on SettingsLib, internal resource IDs, or hidden APIs.
+
+Android 16 QPR1 expressive icons: android16-qpr1-release commit
+33b96ce8a122757002e5040ac59824bd7a262e00. See qpr1-icons.json.
+Copyright (C) 2023, 2025 The Android Open Source Project.
+Wi-Fi normal/error assets copied verbatim; levels 2 and 3 both map to drawn level 2,
+as specified in QPR1 WifiIcons. Cellular normal/error assets copied with only
+SignalDrawable-compatible autoMirrored added. No manually synthesized cutouts.

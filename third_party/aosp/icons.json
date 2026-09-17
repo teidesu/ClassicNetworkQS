@@ -1,0 +1,90 @@
+{
+  "revision": "android-16.0.0_r1",
+  "icons": {
+    "ic_wifi_0": {
+      "source": "core/res/res/drawable/ic_wifi_signal_0.xml",
+      "source_sha256": "5064528712ec8d635c8b750b4e02658eb936714594f1865b6d171d9fe6cf369c"
+    },
+    "ic_wifi_0_no_internet": {
+      "source": "packages/SettingsLib/res/drawable/ic_no_internet_wifi_signal_0.xml",
+      "source_sha256": "5653dc4351b8654f6872edd9b728d2252accd40a8405bcccef939f7b313835ba"
+    },
+    "ic_cellular_0": {
+      "source": "core/res/res/drawable/ic_signal_cellular_0_4_bar.xml",
+      "source_sha256": "d03f427eb09b1f1ba75c3c1840fd7de9a9df6655ca020181b6011115bca4da9c",
+      "adaptation": "autoMirrored; STATE_CUT variant clips x=17..24,y=7..24 and adds config_signalAttributionPath"
+    },
+    "ic_wifi_1": {
+      "source": "core/res/res/drawable/ic_wifi_signal_1.xml",
+      "source_sha256": "da7700c95a771182d519494a3a2769e79cc392ebe9cecb0345207d8ef8374179"
+    },
+    "ic_wifi_1_no_internet": {
+      "source": "packages/SettingsLib/res/drawable/ic_no_internet_wifi_signal_1.xml",
+      "source_sha256": "6f15f442954b42e5c2b92982171cc5c325467a2a3d683931b77039a6ad5e0199"
+    },
+    "ic_cellular_1": {
+      "source": "core/res/res/drawable/ic_signal_cellular_1_4_bar.xml",
+      "source_sha256": "9cd264ec11bd958b10e03f011dcfe1bf3dc2e55fab2a9ba281923c0258f3fc23",
+      "adaptation": "autoMirrored; STATE_CUT variant clips x=17..24,y=7..24 and adds config_signalAttributionPath"
+    },
+    "ic_wifi_2": {
+      "source": "core/res/res/drawable/ic_wifi_signal_2.xml",
+      "source_sha256": "95203e4d316b095baf8bbff25b97b581c63c399da4ef97419ff842b7d412c774"
+    },
+    "ic_wifi_2_no_internet": {
+      "source": "packages/SettingsLib/res/drawable/ic_no_internet_wifi_signal_2.xml",
+      "source_sha256": "cffe0d1b57cf3c1e9b2cd7990f6456c7a273bac2eb39b5176a1427402a6c5180"
+    },
+    "ic_cellular_2": {
+      "source": "core/res/res/drawable/ic_signal_cellular_2_4_bar.xml",
+      "source_sha256": "d47dd29ba35baaf30bb7045835f200c875b9b42401d591244d57b28046489244",
+      "adaptation": "autoMirrored; STATE_CUT variant clips x=17..24,y=7..24 and adds config_signalAttributionPath"
+    },
+    "ic_wifi_3": {
+      "source": "core/res/res/drawable/ic_wifi_signal_3.xml",
+      "source_sha256": "c655b6508f88d32bf0c525ca12de3df48077f86b67d0ed133b90c09a56477421"
+    },
+    "ic_wifi_3_no_internet": {
+      "source": "packages/SettingsLib/res/drawable/ic_no_internet_wifi_signal_3.xml",
+      "source_sha256": "acab910569c34a01a85bb91f4729e3f27a14c9485585c451ef84b84720379cba"
+    },
+    "ic_cellular_3": {
+      "source": "core/res/res/drawable/ic_signal_cellular_3_4_bar.xml",
+      "source_sha256": "3c3c0aa6ca0960a1eee69cdb5b7ca5331a8f1a7dc999ac5900c0b6939ca16116",
+      "adaptation": "autoMirrored; STATE_CUT variant clips x=17..24,y=7..24 and adds config_signalAttributionPath"
+    },
+    "ic_wifi_4": {
+      "source": "core/res/res/drawable/ic_wifi_signal_4.xml",
+      "source_sha256": "30a7c683f7334ddd6a5dd1a0c4c5556cd1c822d198d523fd0a954d9f045162f9"
+    },
+    "ic_wifi_4_no_internet": {
+      "source": "packages/SettingsLib/res/drawable/ic_no_internet_wifi_signal_4.xml",
+      "source_sha256": "090b0567afd834f0879874ac814a441e3dfe8770520ad176174be950c4e12e91"
+    },
+    "ic_cellular_4": {
+      "source": "core/res/res/drawable/ic_signal_cellular_4_4_bar.xml",
+      "source_sha256": "a4a293a1be5657367f66fce1e8379e3df903fc624e7509184f8411bc9d32a9dc",
+      "adaptation": "autoMirrored; STATE_CUT variant clips x=17..24,y=7..24 and adds config_signalAttributionPath"
+    },
+    "ic_ethernet": {
+      "source": "packages/SystemUI/res/drawable/stat_sys_ethernet_fully.xml",
+      "source_sha256": "97c0135ad0f89f5f4a31e2873d8819acb9fe636b82993c68a44c87c32f769b74"
+    },
+    "ic_ethernet_no_internet": {
+      "source": "packages/SystemUI/res/drawable/stat_sys_ethernet.xml",
+      "source_sha256": "3d20f32a7fd5bd56eb5ee718c4f369cb30d269015d22424ab22463ee27f7c0db"
+    },
+    "ic_disconnected": {
+      "source": "packages/SystemUI/res/drawable/ic_qs_no_internet_unavailable.xml",
+      "source_sha256": "ee2043d03609e7b1e8137cf09385c36d1da29787c0d847d99c8e83a4b4773717"
+    },
+    "ic_airplane": {
+      "source": "packages/SystemUI/res/drawable/ic_qs_no_internet_unavailable.xml",
+      "source_sha256": "ee2043d03609e7b1e8137cf09385c36d1da29787c0d847d99c8e83a4b4773717"
+    },
+    "ic_internet": {
+      "source": "packages/SystemUI/res/drawable/ic_qs_no_internet_available.xml",
+      "source_sha256": "460313a253e73827f7b1d031868662c71d71aa1f036474851fbb0d66e17cb7c1"
+    }
+  }
+}

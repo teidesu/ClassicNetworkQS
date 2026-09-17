@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/settings_root" android:layout_width="match_parent" android:layout_height="match_parent" android:background="?attr/colorSurface" android:fillViewport="true" android:clipToPadding="false">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="24dp">
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:layout_marginBottom="24dp" android:text="@string/internet" android:textSize="40sp" android:fontFamily="sans-serif-medium" android:textColor="?attr/colorOnSurface" />
+        <com.google.android.material.button.MaterialButton android:id="@+id/add_tile" android:layout_width="match_parent" android:layout_height="56dp" android:text="@string/add_tile" app:cornerRadius="28dp" />
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:layout_marginBottom="28dp" android:id="@+id/add_tile_instructions" android:text="@string/add_tile_instructions" android:textColor="?attr/colorOnSurfaceVariant" android:textSize="15sp" />
+        <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" app:cardCornerRadius="24dp" app:cardElevation="0dp" app:strokeWidth="0dp" app:cardBackgroundColor="?attr/colorSurfaceVariant">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/icon_style" android:textSize="22sp" android:textColor="?attr/colorOnSurface" android:fontFamily="sans-serif-medium" />
+                <RadioGroup android:id="@+id/icon_style" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp">
+                    <com.google.android.material.radiobutton.MaterialRadioButton android:id="@+id/qpr1_style" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="64dp" android:text="@string/qpr1_style" android:textSize="16sp" android:drawableEnd="@drawable/ic_qpr1_wifi_4" android:drawableTint="?attr/colorOnSurface" app:useMaterialThemeColors="true" />
+                    <com.google.android.material.radiobutton.MaterialRadioButton android:id="@+id/classic_style" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="64dp" android:text="@string/classic_style" android:textSize="16sp" android:drawableEnd="@drawable/ic_wifi_4" android:drawableTint="?attr/colorOnSurface" app:useMaterialThemeColors="true" />
+                </RadioGroup>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" app:cardCornerRadius="24dp" app:cardElevation="0dp" app:strokeWidth="0dp" app:cardBackgroundColor="?attr/colorSurfaceVariant">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+                <com.google.android.material.materialswitch.MaterialSwitch android:id="@+id/advanced_network_type" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="56dp" android:text="@string/advanced_network_type" android:textSize="20sp" android:textColor="?attr/colorOnSurface" android:fontFamily="sans-serif-medium" />
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/advanced_network_type_description" android:textSize="16sp" android:textColor="?attr/colorOnSurfaceVariant" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" app:cardCornerRadius="24dp" app:cardElevation="0dp" app:strokeWidth="0dp" app:cardBackgroundColor="?attr/colorSurfaceVariant">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/long_tap_action" android:textSize="22sp" android:textColor="?attr/colorOnSurface" android:fontFamily="sans-serif-medium" />
+                <RadioGroup android:id="@+id/long_tap_action" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp">
+                    <com.google.android.material.radiobutton.MaterialRadioButton android:id="@+id/open_internet_settings" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="64dp" android:text="@string/internet" android:textSize="16sp" app:useMaterialThemeColors="true" />
+                    <com.google.android.material.radiobutton.MaterialRadioButton android:id="@+id/open_network_settings" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="64dp" android:text="@string/network_and_internet" android:textSize="16sp" app:useMaterialThemeColors="true" />
+                </RadioGroup>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" app:cardCornerRadius="24dp" app:cardElevation="0dp" app:strokeWidth="0dp" app:cardBackgroundColor="?attr/colorSurfaceVariant">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/network_name" android:textSize="22sp" android:textColor="?attr/colorOnSurface" android:fontFamily="sans-serif-medium" android:id="@+id/location_title" android:drawablePadding="12dp" android:drawableTint="?attr/colorPrimary" />
+                <LinearLayout android:id="@+id/location_setup" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="@string/network_name_explanation" android:textSize="16sp" android:lineSpacingExtra="3dp" android:textColor="?attr/colorOnSurfaceVariant" />
+                    <TextView android:id="@+id/location_status" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:textSize="15sp" android:textColor="?attr/colorPrimary" />
+                    <com.google.android.material.button.MaterialButton android:id="@+id/location_permission" style="@style/Widget.Material3.Button.TonalButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="48dp" android:layout_marginTop="8dp" android:text="@string/manage_location" app:cornerRadius="24dp" />
+                </LinearLayout>
+                <TextView android:id="@+id/location_service_warning" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="@string/location_disabled" android:textColor="?attr/colorOnSurfaceVariant" android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" app:cardCornerRadius="24dp" app:cardElevation="0dp" app:strokeWidth="0dp" app:cardBackgroundColor="?attr/colorSurfaceVariant">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/sim_updates" android:textSize="22sp" android:textColor="?attr/colorOnSurface" android:fontFamily="sans-serif-medium" android:id="@+id/phone_title" android:drawablePadding="12dp" android:drawableTint="?attr/colorPrimary" />
+                <LinearLayout android:id="@+id/phone_setup" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="@string/sim_updates_explanation" android:textSize="16sp" android:lineSpacingExtra="3dp" android:textColor="?attr/colorOnSurfaceVariant" />
+                    <TextView android:id="@+id/phone_status" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:textSize="15sp" android:textColor="?attr/colorPrimary" />
+                    <com.google.android.material.button.MaterialButton android:id="@+id/phone_permission" style="@style/Widget.Material3.Button.TonalButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="48dp" android:layout_marginTop="8dp" android:text="@string/manage_phone" app:cornerRadius="24dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</ScrollView>
