@@ -1,0 +1,69 @@
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      artifact-name:
+        required: true
+        type: string
+    outputs:
+      apk-name:
+        value: ${{ jobs.build.outputs.apk-name }}
+      version-name:
+        value: ${{ jobs.build.outputs.version-name }}
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      apk-name: ${{ steps.artifacts.outputs.apk-name }}
+      version-name: ${{ steps.artifacts.outputs.version-name }}
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: gradle/actions/setup-gradle@0b6dd653ba04f4f93bf581ec31e66cbd7dcb644d # v4
+        with:
+          cache-read-only: ${{ github.event_name == 'pull_request' }}
+
+      - uses: android-actions/setup-android@9fc6c4e9069bf8d3d10b2204b1fb8f6ef7065407 # v3
+        with:
+          packages: platforms;android-37.0 build-tools;36.0.0
+
+      - name: check and build unsigned artifacts
+        env:
+          CI_VERSION: ${{ vars.BUILD_NUMBER || '1' }}
+        run: ./gradlew --no-daemon -PciVersion="$CI_VERSION" :app:lintRelease :app:testDebugUnitTest :app:assembleRelease
+
+      - name: stage apk
+        id: artifacts
+        run: |
+          apk=app/build/outputs/apk/release/app-release-unsigned.apk
+          badging=$("$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging "$apk")
+          version="${badging#*versionName=\'}"
+          version="${version%%\'*}"
+          [[ "$version" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]]
+          name="ClassicNetworkQS-${version}-${GITHUB_SHA:0:7}.apk"
+          mkdir -p out
+          cp "$apk" "out/$name"
+          printf 'apk-name=%s\nversion-name=%s\n' "$name" "$version" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ${{ inputs.artifact-name || format('ClassicNetworkQS-{0}', github.run_id) }}-unsigned
+          path: out/*.apk
+          if-no-files-found: error
+          retention-days: 14

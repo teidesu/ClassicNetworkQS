@@ -1,0 +1,134 @@
+name: release
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: release-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    permissions:
+      contents: read
+    with:
+      artifact-name: ClassicNetworkQS-release-${{ github.run_id }}
+
+  sign:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: signing
+    permissions:
+      id-token: write
+      attestations: write
+      artifact-metadata: write
+      contents: read
+    steps:
+      - uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - uses: android-actions/setup-android@9fc6c4e9069bf8d3d10b2204b1fb8f6ef7065407 # v3
+        with:
+          packages: build-tools;36.0.0
+
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: ClassicNetworkQS-release-${{ github.run_id }}-unsigned
+          path: out
+
+      - name: decode keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        run: |
+          : "${KEYSTORE_BASE64:?KEYSTORE_BASE64 secret missing}"
+          umask 077
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/release.keystore"
+
+      - name: align, sign and verify apk
+        env:
+          APK_NAME: ${{ needs.build.outputs.apk-name }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          : "${KEY_ALIAS:?KEY_ALIAS secret missing}"
+          : "${KEYSTORE_PASSWORD:?KEYSTORE_PASSWORD secret missing}"
+          : "${KEY_PASSWORD:?KEY_PASSWORD secret missing}"
+          tools="$ANDROID_HOME/build-tools/36.0.0"
+          "$tools/zipalign" -P 16 -f 4 "out/$APK_NAME" "$RUNNER_TEMP/aligned.apk"
+          "$tools/apksigner" sign \
+            --ks "$RUNNER_TEMP/release.keystore" \
+            --ks-key-alias "$KEY_ALIAS" \
+            --ks-pass env:KEYSTORE_PASSWORD \
+            --key-pass env:KEY_PASSWORD \
+            --v4-signing-enabled false \
+            --in "$RUNNER_TEMP/aligned.apk" \
+            --out "out/$APK_NAME"
+          "$tools/apksigner" verify --verbose --print-certs "out/$APK_NAME"
+          "$tools/zipalign" -P 16 -c 4 "out/$APK_NAME"
+
+      - name: wipe signing files
+        if: always()
+        run: rm -f "$RUNNER_TEMP/release.keystore" "$RUNNER_TEMP/aligned.apk"
+
+      - name: attest signed apk
+        uses: actions/attest@281a49d4cbb0a72c9575a50d18f6deb515a11deb # v4
+        with:
+          subject-path: out/${{ needs.build.outputs.apk-name }}
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: ClassicNetworkQS-release-${{ github.run_id }}-signed
+          path: out/*.apk
+          if-no-files-found: error
+          retention-days: 30
+
+  upload:
+    needs: [build, sign]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: ClassicNetworkQS-release-${{ github.run_id }}-signed
+          path: out
+
+      - name: check variable token
+        env:
+          CI_VARS_TOKEN: ${{ secrets.CI_VARS_TOKEN }}
+        run: ': "${CI_VARS_TOKEN:?CI_VARS_TOKEN secret missing}"'
+
+      - name: create github release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION_NAME: ${{ needs.build.outputs.version-name }}
+          APK_NAME: ${{ needs.build.outputs.apk-name }}
+        run: |
+          tag="v${VERSION_NAME}"
+          git check-ref-format "refs/tags/$tag"
+          gh release create "$tag" \
+            --repo "$GITHUB_REPOSITORY" \
+            --target "$GITHUB_SHA" \
+            --title "$tag" \
+            --generate-notes \
+            "out/$APK_NAME"
+
+      - name: increment build number
+        env:
+          GH_TOKEN: ${{ secrets.CI_VARS_TOKEN }}
+          VERSION_NAME: ${{ needs.build.outputs.version-name }}
+        run: |
+          next=$((10#$VERSION_NAME + 1))
+          gh variable set BUILD_NUMBER --repo "$GITHUB_REPOSITORY" --body "$next"

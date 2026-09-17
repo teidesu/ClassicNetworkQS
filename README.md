@@ -6,6 +6,13 @@ in other words, this app brings back the unified internet tile to android 17+.
 
 full disclosure: this entire thing was vibe-coded with codex (5.6 sol)
 
+## install
+
+you can install the app from the github releases page.
+
+updates will most likely be rare, but you can also install it from github
+through obtainium to get automatic updates.
+
 ## build
 
 while this app primarily targets android 17, it is possible to use it on older versions of android (but why?).

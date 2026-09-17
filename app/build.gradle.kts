@@ -14,8 +14,9 @@ android {
         applicationId = "desu.tei.classicnetworkqs"
         minSdk = 34
         targetSdk = 37
-        versionCode = 1
-        versionName = "1.0"
+        val ciVersion = providers.gradleProperty("ciVersion").orNull
+        versionCode = ciVersion?.toInt()?.also { require(it in 1..2100000000) } ?: 1
+        versionName = ciVersion ?: "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
